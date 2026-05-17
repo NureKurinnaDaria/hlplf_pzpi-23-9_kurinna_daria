@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_admin_courses"
+        android:title="Курси"
+        android:icon="@android:drawable/ic_menu_agenda"/>
+
+    <item
+        android:id="@+id/nav_admin_paths"
+        android:title="Програми"
+        android:icon="@android:drawable/ic_menu_sort_by_size"/>
+
+    <item
+        android:id="@+id/nav_admin_analytics"
+        android:title="Аналітика"
+        android:icon="@android:drawable/ic_menu_info_details"/>
+
+    <item
+        android:id="@+id/nav_admin_profile"
+        android:title="Профіль"
+        android:icon="@android:drawable/ic_menu_manage"/>
+
+</menu>

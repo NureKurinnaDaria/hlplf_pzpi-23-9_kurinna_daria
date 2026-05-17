@@ -1,0 +1,48 @@
+﻿{% extends "currencies/base.html" %}
+
+{% block title %}Курси валют — Рівень 1{% endblock %}
+
+{% block content %}
+
+<div class="info-bar">
+    <strong>Рівень 1:</strong> Таблиця поточних курсів валют відносно гривні (UAH).
+    Нові валюти додаються через <a href="/admin/currencies/currency/" target="_blank">адмін-панель</a> (Рівень 3).
+</div>
+
+<div class="card">
+    <div class="card-header">📊 Поточні курси валют</div>
+    <div class="card-body" style="padding:0;">
+        {% if currencies %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Код</th>
+                    <th>Назва</th>
+                    <th>Курс купівлі (UAH)</th>
+                    <th>Курс продажу (UAH)</th>
+                    <th>Оновлено</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for currency in currencies %}
+                <tr>
+                    <td><span class="badge-code">{{ currency.code }}</span></td>
+                    <td>{{ currency.name }}</td>
+                    <td class="rate-buy">{{ currency.buy_rate }}</td>
+                    <td class="rate-sell">{{ currency.sell_rate }}</td>
+                    <td class="meta-info">{{ currency.updated_at|date:"d.m.Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <div class="icon">💰</div>
+            <p>Валюти ще не додані.</p>
+            <p>Перейдіть до <a href="/admin/currencies/currency/add/" target="_blank">адмін-панелі</a>, щоб додати першу валюту.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

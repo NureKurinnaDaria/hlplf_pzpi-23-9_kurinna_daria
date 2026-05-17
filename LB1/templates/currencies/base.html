@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Курс валют{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="header">
+    <div>
+        <h1>💱 Курс валют</h1>
+        <div class="subtitle">Актуальні курси купівлі та продажу до гривні (UAH)</div>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="{% url 'currency_list' %}" {% if request.resolver_match.url_name == 'currency_list' %}class="active"{% endif %}>
+        📊 Курси валют
+    </a>
+    <a href="{% url 'daily_snapshot' %}" {% if request.resolver_match.url_name == 'daily_snapshot' %}class="active"{% endif %}>
+        📅 Курси дня
+    </a>
+    <a href="/admin/currencies/currency/" target="_blank">
+        ⚙️ Адмін-панель
+    </a>
+    <a href="{% url 'api_currency_list' %}" {% if request.resolver_match.url_name == 'api_currency_list' %}class="active"{% endif %}>
+        🔌 API
+    </a>
+</nav>
+
+<div class="container">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

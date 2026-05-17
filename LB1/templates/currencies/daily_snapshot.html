@@ -1,0 +1,84 @@
+{% extends "currencies/base.html" %}
+
+{% block title %}Курси дня — Рівень 2{% endblock %}
+
+{% block content %}
+
+<div class="info-bar">
+    <strong>Рівень 2:</strong> Збереження курсів поточного дня в окремій вкладці.
+    Натисніть кнопку, щоб зафіксувати актуальні курси на сьогодні.
+</div>
+
+<div class="card">
+    <div class="card-header">📅 Курси на {{ today|date:"d.m.Y" }} (сьогодні)</div>
+    <div class="card-body">
+        <form method="post" style="margin-bottom: 20px;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">
+                💾 Зберегти поточні курси на сьогодні
+            </button>
+        </form>
+
+        {% if snapshots %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Валюта</th>
+                    <th>Назва</th>
+                    <th>Курс купівлі</th>
+                    <th>Курс продажу</th>
+                    <th>Збережено о</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for snap in snapshots %}
+                <tr>
+                    <td><span class="badge-code">{{ snap.currency.code }}</span></td>
+                    <td>{{ snap.currency.name }}</td>
+                    <td class="rate-buy">{{ snap.buy_rate }}</td>
+                    <td class="rate-sell">{{ snap.sell_rate }}</td>
+                    <td class="meta-info">{{ snap.saved_at|date:"H:i:s" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <div class="icon">📋</div>
+            <p>Курси на сьогодні ще не збережені. Натисніть кнопку вище.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if all_snapshots %}
+<div class="card">
+    <div class="card-header">🗂️ Архів курсів попередніх днів</div>
+    <div class="card-body" style="padding:0;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Валюта</th>
+                    <th>Назва</th>
+                    <th>Курс купівлі</th>
+                    <th>Курс продажу</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for snap in all_snapshots %}
+                <tr>
+                    <td class="meta-info">{{ snap.date|date:"d.m.Y" }}</td>
+                    <td><span class="badge-code">{{ snap.currency.code }}</span></td>
+                    <td>{{ snap.currency.name }}</td>
+                    <td class="rate-buy">{{ snap.buy_rate }}</td>
+                    <td class="rate-sell">{{ snap.sell_rate }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

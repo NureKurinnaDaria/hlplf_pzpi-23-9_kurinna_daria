@@ -1,0 +1,14 @@
+# Залежності
+node_modules/
+ 
+# Змінні середовища — НЕ комітити!
+.env
+ 
+# База даних (JSON-файли з даними)
+users.json
+courses.json
+paths.json
+ 
+# Системні файли
+.DS_Store
+ 

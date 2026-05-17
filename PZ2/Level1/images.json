@@ -1,0 +1,25 @@
+{
+  "title": "Моя галерея",
+  "images": [
+    {
+      "url": "https://i.ibb.co/chYy1cpM/photo-2026-02-19-18-10-14.jpg",
+      "caption": "Машина мрії"
+    },
+    {
+      "url": "https://i.ibb.co/5hpg6CZ5/photo-2026-02-19-18-03-49.jpg",
+      "caption": "Телефонуємо по важливих справах"
+    },
+    {
+      "url": "https://i.ibb.co/C5xRn8nb/photo-2026-02-19-18-02-59.jpg",
+      "caption": "Найкраща ковбаса - \"Столична\""
+    },
+    {
+      "url": "https://i.ibb.co/jSLnJgt/photo-2026-04-24-11-54-12.jpg",
+      "caption": "Квіти"
+    },
+    {
+      "url": "https://i.ibb.co/S46njMqC/photo-2026-04-24-11-53-54.jpg",
+      "caption": "Новий рік"
+    }
+  ]
+}

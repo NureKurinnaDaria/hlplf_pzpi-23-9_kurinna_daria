@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Рівень 1 — Завдання 5: Відображення зображень</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>🖼️ Галерея зображень</h1>
+    <p id="status">Завантаження...</p>
+    <p id="error">❌ Помилка при завантаженні даних</p>
+    <div id="gallery"></div>
+
+    <script>
+      fetch("images.json")
+        .then((response) => {
+          if (!response.ok)
+            throw new Error("Помилка мережі: " + response.status);
+          return response.json();
+        })
+        .then((data) => {
+          document.getElementById("status").textContent =
+            `✅ Завантажено: "${data.title}" — ${data.images.length} зображень`;
+
+          const gallery = document.getElementById("gallery");
+
+          // Для кожного об'єкта у масиві images — створюємо картку
+          data.images.forEach((item) => {
+            // Створюємо елементи через document.createElement
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const img = document.createElement("img");
+            img.src = item.url;
+            img.alt = item.caption;
+            img.loading = "lazy";
+
+            const caption = document.createElement("p");
+            caption.textContent = item.caption;
+
+            card.appendChild(img);
+            card.appendChild(caption);
+            gallery.appendChild(card);
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+          document.getElementById("status").style.display = "none";
+          document.getElementById("error").style.display = "block";
+        })
+        .finally(() => {
+          console.log("Запит завершено (finally)");
+        });
+    </script>
+  </body>
+</html>

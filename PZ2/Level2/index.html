@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Рівень 2 — Завдання 5: Перевірка JSON</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔍 Перевірка JSON</h1>
+      <p class="subtitle">Введіть JSON-текст і перевірте, чи є він коректним</p>
+
+      <div class="buttons">
+        <button onclick="loadValidExample()">✅ Правильний приклад</button>
+        <button onclick="loadInvalidExample()">❌ Неправильний приклад</button>
+        <button onclick="clearAll()">🗑 Очистити</button>
+      </div>
+
+      <textarea
+        id="json-input"
+        placeholder="Введіть або вставте JSON тут..."
+      ></textarea>
+
+      <button class="check-btn" onclick="checkJSON()">Перевірити JSON</button>
+
+      <div id="result"></div>
+    </div>
+
+    <script>
+      const validExample = `{
+  "name": "Іван Петренко",
+  "age": 21,
+  "active": true,
+  "courses": ["JSON", "fetch", "React"]
+}`;
+
+      const invalidExample = `{
+  "name": "Помилка тут",
+  "age": 21,
+  "active": true,
+}`;
+
+      function loadValidExample() {
+        document.getElementById("json-input").value = validExample;
+        clearResult();
+      }
+
+      function loadInvalidExample() {
+        document.getElementById("json-input").value = invalidExample;
+        clearResult();
+      }
+
+      function clearAll() {
+        document.getElementById("json-input").value = "";
+        clearResult();
+      }
+
+      function clearResult() {
+        const result = document.getElementById("result");
+        result.textContent = "";
+        result.className = "";
+      }
+
+      function checkJSON() {
+        const input = document.getElementById("json-input").value.trim();
+        const result = document.getElementById("result");
+
+        clearResult();
+
+        if (!input) {
+          result.textContent = "⚠️ Спочатку введіть JSON-текст.";
+          result.className = "warning";
+          return;
+        }
+
+        try {
+          JSON.parse(input);
+          result.textContent = "✅ Дійсний JSON. Текст має правильний формат.";
+          result.className = "success";
+        } catch (error) {
+          result.textContent = "❌ Недійсний JSON. Помилка: " + error.message;
+          result.className = "error";
+        }
+      }
+    </script>
+  </body>
+</html>
